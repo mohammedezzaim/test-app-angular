@@ -1,0 +1,60 @@
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'commande.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'commande.tabPan' | translate}}">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-semibold" for="1">{{'commande.code' | translate}}</label>
+                                    <input  type="text" pInputText [disabled]="true" placeholder="{{'commande.code' | translate}}" autofocus  id="1" [ngModel]="item.code">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-semibold" for="2">{{'commande.total' | translate}}</label>
+                                    <p-inputNumber id="2" [disabled]="true" placeholder="{{'commande.total' | translate}}" [ngModel]="item.total"></p-inputNumber>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-semibold" for="3">{{'commande.totalPayer' | translate}}</label>
+                                    <p-inputNumber id="3" [disabled]="true" placeholder="{{'commande.totalPayer' | translate}}" [ngModel]="item.totalPayer"></p-inputNumber>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-semibold" for="4">{{'commande.dateCommande' | translate}}</label>
+                                    <p-calendar class="w-full" id="4" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'commande.dateCommande' | translate}}"  [ngModel]="item.dateCommande" dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-sm font-semibold" for="5">{{'commande.etatComande' | translate}}</label>
+                                <input type="text" pInputText [disabled]="true" placeholder="{{'commande.etatComande' | translate}}" autofocus  id="5" [ngModel]="item.etatComande?.libelle">
+                            </div>
+                </div>
+            </p-tabPanel>
+
+                    <p-tabPanel header="{{'commande.commandeItems' | translate}}">
+                        <div class="card p-4">
+                            <p-table [value]="item.commandeItems" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                                    <th>Prix</th>
+                                                    <th>Quantite</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                                    <td>{{p.prix}}</td>
+                                                    <td>{{p.quantite}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="flex justify-end p-4">
+            <div>
+                <button class="border border-gray-400 font-semibold py-2 px-4 rounded shadow" (click)="hideViewDialog()">
+                    <i class="pi pi-times"></i> Annuler
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
